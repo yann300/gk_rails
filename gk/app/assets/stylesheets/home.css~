@@ -1,0 +1,26 @@
+.resultcontainer{
+	margin-top : 10px;
+}
+
+.resultcontainertitle{
+	color : #1E0FBE;
+}
+
+.resultcontainerlink{
+	color : #006621;
+}
+
+.resultcontainerhightlight{
+	font-style : italic;
+}
+
+#searchContainer{
+	
+}
+
+#searchInput{
+	font-size : 21px;
+}
+
+#resultsContainer#
+}

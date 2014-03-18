@@ -1,0 +1,11 @@
+class SearchResult 
+	
+
+   def initialize(url, title, content, matched_content)
+        @url = url
+	@title = title
+	@content = content
+	@hightlight = matched_content
+    end
+end
+
