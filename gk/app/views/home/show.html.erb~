@@ -47,7 +47,7 @@ function getUrlVars()
 }
 </script>
 <div id="searchContainer">
-	<input id="searchInput" class="resultcontainerhightlight" ></input>
+	<span class="searchTitle" >gK</span> <input id="searchInput"></input>
 </div> 
 <div id="resultsContainer">		
 </div> 

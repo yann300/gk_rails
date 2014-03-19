@@ -1,10 +1,21 @@
+
+body{
+	font-family : arial,sans-serif;
+}
+
 .resultcontainer{
 	margin-top : 10px;
 }
 
-.resultcontainertitle{
+.resultcontainertitle a {
 	color : #1E0FBE;
+	text-decoration : none;
 }
+
+.resultcontainertitle a : hover{	
+	text-decoration : underline !important;
+}
+
 
 .resultcontainerlink{
 	color : #006621;
@@ -12,6 +23,7 @@
 
 .resultcontainerhightlight{
 	font-style : italic;
+	font-size : 14px;
 }
 
 #searchContainer{
