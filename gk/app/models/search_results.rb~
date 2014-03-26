@@ -1,7 +1,8 @@
 class SearchResults 
-@results = ""
-   def initialize(results)
+
+   def initialize(results, total)
         @results = results
+	@total = total
     end
 
    def getResult

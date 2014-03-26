@@ -5,7 +5,7 @@ include SearchResultHelper
    def initialize()       
    end
 	
-def search(searchString) 
-	return self.Search(searchString)      
+def search(searchString, startIndex) 
+	return self.Search(searchString, startIndex)      
    end
 end

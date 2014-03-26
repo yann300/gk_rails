@@ -5,4 +5,8 @@ node :results do |searchResult|
   searchResult.getResult
 end
 
+node :total do |searchResult|
+  searchResult.getTotal
+end
+
 

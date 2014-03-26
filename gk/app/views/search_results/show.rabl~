@@ -2,7 +2,11 @@
 object @searchResult
 
 node :results do |searchResult|
-  searchResult.results
+  searchResult.getResult
+end
+
+node :total do |searchResult|
+  searchResult.getResult
 end
 
 
