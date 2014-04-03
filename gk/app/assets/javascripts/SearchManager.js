@@ -4,10 +4,11 @@ function searchManager(containerId)
 	this.currentIndex = 0;
 	
 	this.search = function (inputString)
-	{
+	{	
+		$('#loadMore').hide();	
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUI, this);
-		caller.search(inputString, 0);
+		caller.search(inputString, 0);		
 	}
 
 	this.loadMoreSearch = function (inputString)
@@ -18,9 +19,13 @@ function searchManager(containerId)
 	}
 
 	this.updateUIloadMore = function (data){
-		this.currentIndex = this.currentIndex + data.searchresults.results.length - 1;
+		this.currentIndex = this.currentIndex + data.searchresults.results.length;
 		var html = _.template($('#search-results-template').html(), {results: data.searchresults.results});
 		$('#' + this.containerId + ' .results').append(html);
+		if (this.currentIndex + 1 >= data.searchresults.total)
+		{
+			$('#loadMore').hide();		
+		}
 	}
 
 	this.updateUI = function (data){
@@ -30,6 +35,10 @@ function searchManager(containerId)
 		var html = _.template($('#search-results-template').html(), {results: data.searchresults.results});
 		$('#' + this.containerId + ' .results').html(html);
 		$('#' + this.containerId + ' .headerinformation').html(data.searchresults.total + " results.");
+		if (data.searchresults.results.length < data.searchresults.total)
+		{
+			$('#loadMore').show();		
+		}		
 	}
 }
 

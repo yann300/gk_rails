@@ -34,5 +34,16 @@ body{
 	font-size : 21px;
 }
 
-#resultsContainer#
+#resultsContainer{
+}
+
+#loadMore{
+	cursor:pointer;
+	margin-left: 23px;
+	margin-top: 10px;
+}
+
+.headerinformation{
+	margin-left: 23px;
+	margin-top: 10px;
 }
