@@ -9,7 +9,7 @@ class SearchResults
         return @results
     end
 
-	def getTotal
+   def getTotal
         return @total
     end
 end

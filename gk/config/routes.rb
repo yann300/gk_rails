@@ -1,7 +1,12 @@
 Gk::Application.routes.draw do
   get "home/show"
-  get "search_result/show"
+  #get "search_result/show"
   resources :search_results
+  resources :ressourcenodesws
+  post "ressourcenodesws/getRessourceNodesFrom"
+  post "ressourcenodesws/getRessourceNode"
+  post "ressourcenodesws/addRessource"
+  post "recommendws/addPublicationRecommendation"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
