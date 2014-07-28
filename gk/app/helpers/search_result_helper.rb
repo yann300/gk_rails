@@ -9,7 +9,7 @@ require "httpclient"
 		searchString = searchString.gsub("\"", "")
 		enhancedQuery = '"match" : { "' + field + '_' + lang + '"  : { "query" :  "' + searchString + '", "type" : "phrase", "operator" : "and" } }' 
 	else
-		enhancedQuery = '"match" : { "' + field + '_' + lang + '" : { "query" : "' + searchString + '", "operator" : "and" } }'  
+		enhancedQuery = '"match" : { "' + field + '_' + lang + '" : { "query" : "' + searchString + '", "operator" : "or" } }'  
 	end
 	return enhancedQuery
   end
@@ -21,13 +21,30 @@ require "httpclient"
 	size = '"from" : '  + startIndex + ', "size" : 15'
 	#sort = '"sort" : [{ "post_date" : {"order" : "desc"} },"_score"]'
 	sort = '"sort" : [ { "_score" : {"order" : "desc"} },  { "post_date" : {"order" : "desc"} }]'
-
+	logger.debug searchString
 	translator = BingTranslatorConnect.new
 	translator.ensureAccessToken
-	entranslation = translator.translate(searchString, 'en')
-	detranslation = translator.translate(searchString, 'de')
+	langSource = translator.detect(searchString);
+	if (langSource == "en")
+		frtranslation = translator.translate(searchString, 'fr', langSource)
+		entranslation = searchString
+		detranslation = translator.translate(searchString, 'de', langSource)
+		
+	elsif (langSource == "fr")
+		entranslation = translator.translate(searchString, 'en', langSource)
+		detranslation = translator.translate(searchString, 'de', langSource)
+		frtranslation = searchString
+	
+	elsif (langSource == "de")
+		entranslation = translator.translate(searchString, 'en', langSource)
+		frtranslation = translator.translate(searchString, 'fr', langSource)
+		detranslation = searchString
+	end
+	
 	logger.debug entranslation
-logger.debug detranslation
+        logger.debug detranslation
+	logger.debug frtranslation
+
 	#firstQuery = '"match" : { "_all" : { "query" :  "guerre", "type" : "phrase", "operator" : "and" } }' 
 	#secondQuery = '"match" : { "_all" : { "query" :  "krieg", "type" : "phrase", "operator" : "and" } }' 
 	boolQuery = '
@@ -46,10 +63,10 @@ logger.debug detranslation
 		        ' + self.GetEnhanceQuery(detranslation, "de", "title")  + '
 		    },
 		    {
-		        ' + self.GetEnhanceQuery(searchString, "fr", "content")  + '
+		        ' + self.GetEnhanceQuery(frtranslation, "fr", "content")  + '
 		    },
 		    {
-		        ' + self.GetEnhanceQuery(searchString, "fr", "title")  + '
+		        ' + self.GetEnhanceQuery(frtranslation, "fr", "title")  + '
 		    }
 		],
 		"minimum_should_match" : 1		
@@ -79,9 +96,9 @@ logger.debug detranslation
 	
 	#res = client.post('http://91.121.25.98:9200/_search', query)
 	res = client.post('http://127.0.0.1:9200/_search', query)
-	logger.debug query
+	#logger.debug query
 	parsed = JSON.parse(res.body)
-	#logger.debug res.body
+        #logger.debug res.body
 	resultsA = []
 
 	parsed["hits"]["hits"].each do|item|
@@ -89,8 +106,9 @@ logger.debug detranslation
 		if (item["highlight"] != nil)
 			hightlight = item["highlight"]["content"]
 		end
-  		resultsA.push(SearchResult.new(item["_source"]["url"], item["_source"]["title"],item["_source"]["post_date"], "", hightlight, item["_source"]["id"]))
+  		resultsA.push(SearchResult.new(item, "", hightlight))
 	end
+ 	
 	total = parsed["hits"]["total"]
 	return SearchResults.new(resultsA, total)
   end

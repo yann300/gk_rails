@@ -148,6 +148,7 @@ body{
 }
 
 .resultcontainerscore{
+
 	font-size : 11px;
 }
 

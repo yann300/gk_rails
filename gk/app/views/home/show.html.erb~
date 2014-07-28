@@ -16,7 +16,7 @@
 	<div class="resultcontainerdate" > <i>{{= result.post_date }}</i> </div>
         <div class="resultcontainertitle" ><a href="{{= result.url }}" > {{= result.title }} </a></div>
 	{{ if (result.image != null) { }}
-	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="166" alt="image" ></img> </div>
+	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="60" alt="image" ></img> </div>
 	{{ } }}
 	<div class="resultcontainerscore" > <i>{{= result.score }}</i> </div>
 	<div class="resultcontainerinfo"><div class="resultcontainerinfonode resultcontainerinfonode_updatepending" urlref="{{= result.url }}" ></div></div>
