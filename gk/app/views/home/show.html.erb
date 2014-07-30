@@ -4,16 +4,28 @@
 </script>
 
 <script type="text/template" id="search-results-loadmore-template" >
-    <div class="resultcontainer" id="loadMoreContainer" >
+    <div id="loadMoreContainer" >
         <div id="loadMore" >+</div>
     </div> 
 </script>
 
-<script type="text/template" id="search-results-template" >
-    {{ _.each(results, function(result) { }}
-      <div class="resultcontainer"  >
+<script type="text/template" id="hostresult-container-template" >
+    <div class="articleContainer"  >
+	<div class="hostContent"></div>
+	<div class="footer"> 	
+		<div class="hostResultontainer-more" style="display:none" >display all results (<span class="resultNumber" >1</span>) from <span class="hostName" ></span>
+		</div> 
+	</div>
+    </div> 
+</script>
+
+<script type="text/template" id="search-result-template" >   
+      <div class="resultcontainer hostResultontainer hostContent"  >
  	<div class="resultcontainerhost" > <i>{{= result.host }}</i> </div>
 	<div class="resultcontainerdate" > <i>{{= result.post_date }}</i> </div>
+	{{ if (result.customRelevance > 1) { }}
+	<div class="resultcontainecustomrelevance" > has been recommended </div>
+	{{ } }}
         <div class="resultcontainertitle" ><a href="{{= result.url }}" > {{= result.title }} </a></div>
 	{{ if (result.image != null) { }}
 	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="166" alt="image" ></img> </div>
@@ -22,10 +34,8 @@
 	<div class="resultcontainerinfo"><div class="resultcontainerinfonode resultcontainerinfonode_updatepending" urlref="{{= result.url }}" ></div></div>
 	<div class="resultcontaineraction"><div class="recommend" sourceid="{{= result.ID }}" >recommend</div></div>
         <!--<div class="resultcontainerlink" >{{= result.url }}</div>-->
-	<div class="resultcontainerhightlight" >{{= result.highlight }}</div>
-	
+	<div class="resultcontainerhightlight" >{{= result.highlight }}</div>	
       </div>
-    {{ }); }}  
 </script>
 
 <script type="text/template" id="search-results-news-template" >
@@ -89,6 +99,23 @@ function getUrlVars()
         vars[hash[0]] = hash[1];
     }
     return vars;
+}
+
+$(document).ready(function(){
+    $('#searchInput').bind('keypress',pressed);
+});
+
+function pressed(e)
+{
+    if(e.keyCode === 13)
+    {
+        $('#resultsContainer').show();
+	$('#newsContainer').hide();
+	$('#backLabel').show();
+	query = $('#searchInput').val();		 
+	search_manager.search(query);
+        //put button.click() here
+    }
 }
 </script>
 <div class="header" ><div class="title" >global knowledge</div>

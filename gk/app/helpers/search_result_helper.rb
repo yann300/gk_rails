@@ -18,7 +18,7 @@ require "httpclient"
 	logger = Logger.new(STDOUT)
 	client = HTTPClient.new
 	hightlight = '"highlight" : { "pre_tags" : ["<b>"], "post_tags" : ["</b>"], "fields" : { "content" : { } } }'
-	size = '"from" : '  + startIndex + ', "size" : 15'
+	size = '"from" : '  + startIndex + ', "size" : 40'
 	#sort = '"sort" : [{ "post_date" : {"order" : "desc"} },"_score"]'
 	sort = '"sort" : [ { "_score" : {"order" : "desc"} },  { "post_date" : {"order" : "desc"} }]'
 	logger.debug searchString

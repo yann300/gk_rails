@@ -16,6 +16,7 @@ class SearchResult
 	@post_date = post_date
 	@ID = item["_source"]["id"]
 	@score = item["_score"]
+	@image = item["_source"]["image"]
     end
 end
 

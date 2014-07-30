@@ -17,6 +17,7 @@ class SearchResult
 	@ID = item["_source"]["id"]
 	@score = item["_score"]
 	@image = item["_source"]["image"]
+	@customRelevance = item["_source"]["customRelevance"]
     end
 end
 

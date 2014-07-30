@@ -60,7 +60,24 @@ function searchManager(containerId)
 			var caller = new PublicationRecommandationCaller();
 			caller.on(caller.RECOMMANDATIONSENT_COMPLETE, me.updateUIRecommandationSent, me);
 			caller.addRecommandation(id);
-		});
+		});	
+
+                var hostArticleObjectHash = this.resultSorter.getHostArticleHash();
+		for(var key in hostArticleObjectHash)
+		{
+			//key : jquery container
+		 	if(hostArticleObjectHash.hasOwnProperty(key) && (hostArticleObjectHash[key].length > 0))
+			{	
+				$('#' + key).find('.hostResultontainer-more').bind('click', function (){
+					var popupContainer = $("<div id='hostArticleMorePopUp' ><div class='hostContent' ></div><div>").appendTo('body');
+					for (var i = 0 ; i < hostArticleObjectHash[$(this).attr('id')].length; i++){
+							me.resultSorter.put(hostArticleObjectHash[key][i], popupContainer);				
+					}
+					$(popupContainer).dialog();	
+				});
+			}
+		}
+		
 	}
 
 	this.updateUIRecommandationSent = function(){

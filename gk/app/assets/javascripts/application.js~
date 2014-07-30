@@ -14,7 +14,6 @@
 //= require backbone-min
 //= require jquery
 //= require jquery_ujs
-//= require jqueryui/jquery-ui.min.js
 //= require turbolinks
 //= require_tree .
 
