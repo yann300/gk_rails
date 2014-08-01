@@ -10,20 +10,24 @@ function searchManager(containerId)
 	this.currentIndex = 0;
 	this.resultSorter = new searchResultSorter('#' + this.containerId + ' .results');
 	
+	this.getLang = function(){
+		return $('#langselect').val();	
+	}
 	
 	this.search = function (inputString)
 	{	
+		this.currentIndex = 0;
 		$('#loadMore').hide();	
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUI, this);
-		caller.search(inputString, 0);		
+		caller.search(inputString, 0, this.getLang());		
 	}
 
 	this.loadMoreSearch = function (inputString)
 	{
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUIloadMore, this);
-		caller.search(inputString, this.currentIndex + 1);
+		caller.search(inputString, this.currentIndex, this.getLang());
 	}
 
 	this.updateUIloadMore = function (data){		
@@ -40,10 +44,10 @@ function searchManager(containerId)
 	}
 
 	this.updateSearchPanel = function (data){
-		this.currentIndex = this.currentIndex + data.searchresults.results.length - 1;
+		this.currentIndex = this.currentIndex + data.searchresults.results.length;
 		$('#loadMoreContainer').remove(); //in case load more is already displayed.
 		this.resultSorter.applyResults(data.searchresults.results);		
-		if (!(this.currentIndex + 1 >= data.searchresults.total))
+		if (this.currentIndex + 1 <= data.searchresults.total)
 		{
 			var htmlLoadMore = _.template($('#search-results-loadmore-template').html(), {});
 			$('#' + this.containerId + ' .results').append(htmlLoadMore);
@@ -81,10 +85,10 @@ function searchCaller()
 	_.extend(this, Backbone.Events);
 
 	this.SEARCH_COMPLETE = "SEARCH_COMPLETE";
-	this.search = function (inputString, startIndex)
+	this.search = function (inputString, startIndex, lang)
 	{
 		var me = this;
-		$.ajax("/search_results/search.json?q=" + inputString + "&i=" + startIndex)
+		$.ajax("/search_results/search.json?lang=" + lang + "&q=" + inputString + "&i=" + startIndex)
 		.done(function(data) {
 			me.trigger(me.SEARCH_COMPLETE, data);
 		})

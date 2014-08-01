@@ -13,7 +13,7 @@
     <div class="articleContainer"  >
 	<div class="hostContent"></div>
 	<div class="footer"> 	
-		<div class="hostResultontainer-more" style="display:none" >display all results (<span class="resultNumber" >1</span>) from <span class="hostName" ></span>
+		<div class="hostResultontainer-more" style="display:none" >display all following results (<span class="resultNumber" >1</span>) from <span class="hostName" ></span>
 		</div> 
 	</div>
     </div> 
@@ -24,7 +24,7 @@
  	<div class="resultcontainerhost" > <i>{{= result.host }}</i> </div>
 	<div class="resultcontainerdate" > <i>{{= result.post_date }}</i> </div>
 	{{ if (result.customRelevance > 1) { }}
-	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="166" alt="image" ></img> </div>
+	<div class="resultcontainecustomrelevance" > has been recommended </div>
 	{{ } }}
         <div class="resultcontainertitle" ><a href="{{= result.url }}" > {{= result.title }} </a></div>
 	{{ if (result.image != null) { }}
@@ -128,7 +128,14 @@ function pressed(e)
 <div class="subtitle" ></div>
 
 
-	<input id="searchInput"></input> <div class="look" id="startSearch" >Take a look</div><div id="backLabel" style='display:none;' >Back to news</div>
+	<input id="searchInput"></input> 
+<select id="langselect">
+	<option value="all" >all languages</div>
+	<option value="fr" >Français</div>
+	<option value="en" >English</div>
+	<option value="de" >Deutsch</div>
+</select>
+ <div class="look" id="startSearch" >Take a look</div><div id="backLabel" style='display:none;' >Back to news</div>
 
 
 

@@ -10,20 +10,24 @@ function searchManager(containerId)
 	this.currentIndex = 0;
 	this.resultSorter = new searchResultSorter('#' + this.containerId + ' .results');
 	
+	this.getLang = function(){
+		return $('#langselect').val();	
+	}
 	
 	this.search = function (inputString)
 	{	
+		this.currentIndex = 0;
 		$('#loadMore').hide();	
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUI, this);
-		caller.search(inputString, 0);		
+		caller.search(inputString, 0, this.getLang());		
 	}
 
 	this.loadMoreSearch = function (inputString)
 	{
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUIloadMore, this);
-		caller.search(inputString, this.currentIndex + 1);
+		caller.search(inputString, this.currentIndex, this.getLang());
 	}
 
 	this.updateUIloadMore = function (data){		
@@ -40,10 +44,10 @@ function searchManager(containerId)
 	}
 
 	this.updateSearchPanel = function (data){
-		this.currentIndex = this.currentIndex + data.searchresults.results.length - 1;
+		this.currentIndex = this.currentIndex + data.searchresults.results.length;
 		$('#loadMoreContainer').remove(); //in case load more is already displayed.
 		this.resultSorter.applyResults(data.searchresults.results);		
-		if (!(this.currentIndex + 1 >= data.searchresults.total))
+		if (this.currentIndex <= data.searchresults.total)
 		{
 			var htmlLoadMore = _.template($('#search-results-loadmore-template').html(), {});
 			$('#' + this.containerId + ' .results').append(htmlLoadMore);
@@ -60,24 +64,7 @@ function searchManager(containerId)
 			var caller = new PublicationRecommandationCaller();
 			caller.on(caller.RECOMMANDATIONSENT_COMPLETE, me.updateUIRecommandationSent, me);
 			caller.addRecommandation(id);
-		});	
-
-                var hostArticleObjectHash = this.resultSorter.getHostArticleHash();
-		for(var key in hostArticleObjectHash)
-		{
-			//key : jquery container
-		 	if(hostArticleObjectHash.hasOwnProperty(key) && (hostArticleObjectHash[key].length > 0))
-			{	
-				$('#' + key).find('.hostResultontainer-more').bind('click', function (){
-					var popupContainer = $("<div id='hostArticleMorePopUp' ><div class='hostContent' ></div><div>").appendTo('body');
-					for (var i = 0 ; i < hostArticleObjectHash[$(this).attr('id')].length; i++){
-							me.resultSorter.put(hostArticleObjectHash[key][i], popupContainer);				
-					}
-					$(popupContainer).dialog();	
-				});
-			}
-		}
-		
+		});
 	}
 
 	this.updateUIRecommandationSent = function(){
@@ -98,10 +85,10 @@ function searchCaller()
 	_.extend(this, Backbone.Events);
 
 	this.SEARCH_COMPLETE = "SEARCH_COMPLETE";
-	this.search = function (inputString, startIndex)
+	this.search = function (inputString, startIndex, lang)
 	{
 		var me = this;
-		$.ajax("/search_results/search.json?q=" + inputString + "&i=" + startIndex)
+		$.ajax("/search_results/search.json?lang=" + lang + "&q=" + inputString + "&i=" + startIndex)
 		.done(function(data) {
 			me.trigger(me.SEARCH_COMPLETE, data);
 		})
