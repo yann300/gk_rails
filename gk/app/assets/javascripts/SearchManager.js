@@ -43,11 +43,12 @@ function searchManager(containerId)
 	this.updateUI = function (data){
 		$(".content").jqxSplitter('collapse');	
 		$('.loading_result').hide();
+		$('#' + this.containerId).show();
 		var htmlContainer = _.template($('#search-results-container-template').html(), {});
 		$('#' + this.containerId).html(htmlContainer);
 		$('#' + this.containerId + ' .headerinformation').html(data.searchresults.total + " results.");
 		this.updateSearchPanel(data);	
-		$('#' + this.containerId).fadeIn(400);
+		//$('#' + this.containerId).fadeIn(400);
 		this.trigger(this.UPDATEUI_COMPLETE, data.searchresults.results);	
 	}
 

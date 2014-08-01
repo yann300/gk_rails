@@ -137,19 +137,19 @@ function pressed(e)
 </script>
 
 <div class="header">
-	<div class="header_left">Header left</div>
+	<div class="header_left"></div>
 	<div class="header_center">
-		<div class="logo_gk" >global knowledge</div>
+		<div class="logo_gk" ><span class="logo_wi" >WI</span><span class="logo_bo" >BO</span><span class="logo_withoutborder">Information without borders</span></div>
 	</div>
 	<div class="header_right">
-		Header right	
+		
 	</div>
 </div>
 <div class="content" >
 	<div class="splitter_left" >
 	<div class="content_left" >
 		<div class="edito" >
-			<div class="edito_title">Informations without borders</div>
+			<div class="edito_title">Internationalization of consciousnesses</div>
 			<div class="edito_body">
 In the time of globalization, of revolution of  information and communications tools, the national borders become blurred.
 The history and the new technologies are underway. At the same time, we observe that nationalist, violent pushes, re-appear.
@@ -183,10 +183,10 @@ The globalization is the internationalization of goods and business, GK wants to
 				</div>
 			</div>		
 		</div>
-	</div><div class="collapse" > <img src='/assets/left.png' title="collapse" width="17" /></div>
+	</div>
 	</div>
 	<div class="splitter_right" >
-	<div class="expand" > <img src='/assets/right.png' width="17" title="expand" /></div>
+	
 		<div class="content_search" >
 				<div class="content_search_input" >
 					<input id="searchInput"></input>
