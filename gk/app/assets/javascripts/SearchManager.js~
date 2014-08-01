@@ -16,15 +16,20 @@ function searchManager(containerId)
 	
 	this.search = function (inputString)
 	{	
+		$('#' + this.containerId).html('');
+		$('#' + this.containerId).hide();
+		$('.loading_result').show();
 		this.currentIndex = 0;
 		$('#loadMore').hide();	
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUI, this);
-		caller.search(inputString, 0, this.getLang());		
+		caller.search(inputString, 0, this.getLang());	
 	}
 
 	this.loadMoreSearch = function (inputString)
 	{
+		$('#loadMore').removeClass('loadMore_plus');
+				$('#loadMore').addClass('loadMore_loading');	
 		var caller = new searchCaller(inputString);
 		caller.on(caller.SEARCH_COMPLETE, this.updateUIloadMore, this);
 		caller.search(inputString, this.currentIndex, this.getLang());
@@ -36,10 +41,13 @@ function searchManager(containerId)
 	}
 
 	this.updateUI = function (data){
+		$(".content").jqxSplitter('collapse');	
+		$('.loading_result').hide();
 		var htmlContainer = _.template($('#search-results-container-template').html(), {});
 		$('#' + this.containerId).html(htmlContainer);
 		$('#' + this.containerId + ' .headerinformation').html(data.searchresults.total + " results.");
 		this.updateSearchPanel(data);	
+		$('#' + this.containerId).fadeIn(400);
 		this.trigger(this.UPDATEUI_COMPLETE, data.searchresults.results);	
 	}
 
@@ -47,7 +55,7 @@ function searchManager(containerId)
 		this.currentIndex = this.currentIndex + data.searchresults.results.length;
 		$('#loadMoreContainer').remove(); //in case load more is already displayed.
 		this.resultSorter.applyResults(data.searchresults.results);		
-		if (this.currentIndex <= data.searchresults.total)
+		if (this.currentIndex + 1 <= data.searchresults.total)
 		{
 			var htmlLoadMore = _.template($('#search-results-loadmore-template').html(), {});
 			$('#' + this.containerId + ' .results').append(htmlLoadMore);

@@ -96,7 +96,7 @@ require "httpclient"
                 "exp": {
                     "post_date": {                        
                         "scale" : "1d",
-			"decay" : 0.5
+			"decay" : 0.2
                     }
                 }
             },

@@ -10,7 +10,9 @@
  *
  *= require_self
  *= require jqueryui/jquery-ui.min.css
+ *= result.css
  *= require jqueryui/jquery-ui.structure.min.css
  *= require jqueryui/jquery-ui.theme.min.css
+ *= require splitter/jqx.base.css
  *= require_tree .
  */

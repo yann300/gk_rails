@@ -15,6 +15,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jqueryui/jquery-ui.min.js
+//= require splitter/jqxcore.js
+//= require splitter/jqxbuttons.js
+//= require splitter/jqxsplitter.js
 //= require turbolinks
 //= require_tree .
 

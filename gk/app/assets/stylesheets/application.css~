@@ -9,5 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jqueryui/jquery-ui.min.css
+ *= result.css
+ *= require jqueryui/jquery-ui.structure.min.css
+ *= require jqueryui/jquery-ui.theme.min.css
  *= require_tree .
  */

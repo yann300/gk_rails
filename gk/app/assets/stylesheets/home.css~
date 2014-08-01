@@ -1,146 +1,80 @@
 
 body{
-	font-family : arial,sans-serif;
+	font-family : Arial,Helvetica,sans-serif;
 	margin : 0;
 }
 
-.hostResultontainer, .articleContainer {
-    
-    margin-top: 10px;   
-    padding: 3px;
-    vertical-align: top;    
-    display : inline-block;
-}
-
-.hostContent{
- 	overflow: hidden;
-	height: 240px;
-	background-color: #F9F9F9;
-	border: 3px solid #F9F9F9;
-}
-
-.popUp{
-	overflow : inherit !important;	
-	height: inherit !important;		
-}
-
-.hostResultontainer-more{
-	font-style: italic;
-	font-size:14px;
-	cursor:pointer;
-}
-
-.hostResultontainer .footer{
-	border-top : 1px solid black;
-}
-
-.resultcontainer{
-	width: 250px;
-	display: inline-block;
-	vertical-align:top;
-}
-
-.resultcontainer:hover{ 	
-    	overflow: auto;    	
+html, body{
+	height: 100%;
 }
 
 
-.resultcontainertitle a {
-	color : #1E0FBE;
-	text-decoration : none;
+/*************** CONTENT ************/
+
+.content{	
+    margin: 0;
+    width: 100%;    
+}
+
+.edito{	
+	/*border :1px solid #B76900;*/
+	border-radius : 2px;
+}
+
+.edito_title, .focus_header {
+	color: #000080;
+    font-size: 22px;
+   
+    padding: 3px 10px 0;
+}
+
+.focus_header{
+	
+	
 	
 }
 
-.resultcontainertitle a:hover{	
-	text-decoration : underline !important;
+.edito_body{
+	 padding: 10px 10px 0;
 }
 
 
-.resultcontainerlink{
-	color : #006621;
+.inter_div_right{
+	height :2px;
+	/*background-color : #B7A600;*/
 }
 
-.resultcontainerhightlight{
-	font-style : italic;
-	font-size : 14px;
+.focus{	
+	/*border : 1px solid #B76900;*/
+	border-radius : 2px;
 }
 
-#searchContainer{
-	
+.focus_header{	
+}
+
+.focus_main{	
+}
+
+.focus_slide{
+	 padding: 10px 10px 0;
+}
+
+.content_search{
+	padding : 10px;	
+}
+
+.content_search_input{	
 }
 
 #searchInput{
 	font-size : 21px;
-	display: inline-block;
-	border: 2px solid #f9f9ed;
-
-}
-
-#resultsContainer{
-}
-
-#loadMore{
-	cursor:pointer;
-	margin-left: 23px;
-	margin-top: 10px;
-}
-
-.headerinformation{
-	width: 90%;
-	margin:auto;
-	margin-top: 10px;
-}
-
-.title{
-	margin: auto;
-	width: 140px;	
-	padding:20px;
-}
-
-.subtitle{
-	display: inline-block;
-}
-
-.header {
-	width : 100%;
-	height:60px;
-	background-color: #f9f9f9;
-	border-bottom : 5px solid #FFCD7C;
-}
-.headerright{
-	float : right;
-	
-}
-
-.headeraction{
-	display: inline-block;
-}
-
-.maincontent{
-	clear: left;
-}
-
-.news{
-	background-color: #e9e9e9;
-	padding: 25px;
-}
-
-.content{
-	border: 1px solid #D9D9D9;
-    	margin: auto;
-    	width: 80%;
-}
-
-.newstemplatecontent{
-	padding: 5px;
-}
-
-.subheader{
-	border-bottom : 5px solid #d9ded2
-}
-
-.subheadercontent{
+	display: inline-block;	
+	width:500px;
 	padding:5px;
+}
+
+#searchInput:focus {
+	border : 2px solid #B7A600;
 }
 
 .look{
@@ -148,56 +82,82 @@ body{
 	display: inline-block;
 }
 
-#backLabel{
-	display: inline-block;
-	cursor: pointer;
-	margin-left: 5px;
+.content_search_result{	
 }
 
-.results{
-	width:90%;
-	margin: auto;
+#resultsContainer{
 }
+
+.splitter_left{
+	
+}
+
+.splitter_right{
+	overflow-y : scroll;
+}
+
+.loading_result{
+	position: absolute; 
+	top: 36%; 
+	left: 45%;
+display : none;
+}
+
+.expand{
+	position:fixed;
+	top:53.3%;
+	display:none;
+	cursor:pointer;
+}
+
+.collapse{
+	cursor: pointer;
+    position: fixed;
+    right: 0%;
+    top: 53.3%;
+}
+
+
+/********* FOOTER *****************/
 
 .basicfooter{
 	font-size: 12px;
 	padding: 10px;
 }
 
-.resultcontainerhost {
-	font-size: 15px;
-}
 
-.resultcontainerdate {
-	font-size: 15px;
-}
-
-.resultcontaineraction .recommend{
-	cursor : pointer;
-	font-size : 14px;
-}
-
-.resultcontainerscore{
-	font-size : 11px;
+.footer {	
+    clear: both;
+    
+    width: 175px;
 }
 
 
-.ui-widget-content{
-	background-color : white !important;
+/******** HEADER *****************/
+
+.header{	
+	width:100%;
+	height:130px;
+	margin: 0;
 }
 
-.footer {
-	width : 165px;
-	border-top: 1px solid #000000;
-    	margin-top: 4px;
-    	width: 165px;
+.header_left{
+	width:150px;
+	display:inline-block;
 }
 
-#loadMoreContainer{
-	display: inline-block;
+.header_center{
+	width:300px;
+	display:inline-block;
 }
 
-.resultcontainecustomrelevance{
-	color : green;
+.logo_gk{
+	width:300px;
+	display:inline-block;
+}
+
+.header_right {
+	width:300px;
+	display:inline-block;
 }
 

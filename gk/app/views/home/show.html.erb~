@@ -5,7 +5,7 @@
 
 <script type="text/template" id="search-results-loadmore-template" >
     <div id="loadMoreContainer" >
-        <div id="loadMore" >+</div>
+        <div id="loadMore" class="loadMore loadMore_plus" ></div>
     </div> 
 </script>
 
@@ -28,7 +28,7 @@
 	{{ } }}
         <div class="resultcontainertitle" ><a href="{{= result.url }}" > {{= result.title }} </a></div>
 	{{ if (result.image != null) { }}
-	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="166" alt="image" ></img> </div>
+	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="236" alt="image" ></img> </div>
 	{{ } }}
 	<div class="resultcontainerscore" > <i>{{= result.score }}</i> </div>
 	<div class="resultcontainerinfo"><div class="resultcontainerinfonode resultcontainerinfonode_updatepending" urlref="{{= result.url }}" ></div></div>
@@ -54,6 +54,7 @@
 var search_manager = null;
 var ressource_manager = null;
 $(function (){
+	initPage();
 	_.templateSettings = {
     		interpolate: /\{\{\=(.+?)\}\}/g,
     		evaluate: /\{\{(.+?)\}\}/g
@@ -88,6 +89,22 @@ $(function (){
 	
 });
 
+function initPage(){
+	$(".content").css('height', $(document).height() - 130 - 55 + 'px');
+	$(".content").jqxSplitter({ width:"99%", height: $(document).height() - 130 - 55, splitBarSize : 15 } );
+	$(".content_left").css('width', '910px');
+	$(".content").on('expanded', function (event){  });
+	$(".content").on('collapsed', function (event){  });
+	
+	/*$('.expand').bind('click', function (e){ 
+		$(".content").jqxSplitter('expand');
+	});
+	$('.collapse').bind('click', function (e){ 
+		$(".content").jqxSplitter('collapse');
+	});*/
+}
+
+
 function getUrlVars()
 {
     var vars = [], hash;
@@ -118,48 +135,76 @@ function pressed(e)
     }
 }
 </script>
-<div class="header" ><div class="title" >global knowledge</div>
-</div>
 
-<div class="subheader" >
-
-<div class="subheadercontent" >
-
-<div class="subtitle" ></div>
-
-
-	<input id="searchInput"></input> 
-<select id="langselect">
-	<option value="all" >all languages</div>
-	<option value="fr" >Français</div>
-	<option value="en" >English</div>
-	<option value="de" >Deutsch</div>
-</select>
- <div class="look" id="startSearch" >Take a look</div><div id="backLabel" style='display:none;' >Back to news</div>
-
-
-
-<div class="headerright" >
-<div class="headeraction" > ? </div><div class="headeraction" > share content </div></div></div></div>
-
-<div class="maincontent" >
-	<div id='newsContainer' class="news" >
-		<div class="newslabel" > Currently : </div>
-		<div class="newscontent" >
-			
-
-
-		</div>	
+<div class="header">
+	<div class="header_left">Header left</div>
+	<div class="header_center">
+		<div class="logo_gk" >global knowledge</div>
 	</div>
-	<div id="resultsContainer" style="display:none;">	
+	<div class="header_right">
+		Header right	
 	</div>
-	<!--<div class="search-content" >
-		<div id="searchContainer">
-			<input id="searchInput"></input>
-		</div> 
-		<div id="resultsContainer">		
-		</div> 
-		<div id="loadMore" style="display:none;" >Load More Results</div>
-	</div>-->
 </div>
-<div class="footer" > <div class='basicfooter' > Contact | powered by Rails </div> </div>
+<div class="content" >
+	<div class="splitter_left" >
+	<div class="content_left" >
+		<div class="edito" >
+			<div class="edito_title">Informations without borders</div>
+			<div class="edito_body">
+In the time of globalization, of revolution of  information and communications tools, the national borders become blurred.
+The history and the new technologies are underway. At the same time, we observe that nationalist, violent pushes, re-appear.
+Against these resurgent nationalisms, a world citizenship has to emerge, an international awareness, to give to the globalization other priorities that circulation of financial fluxs, goods and dumping in employment.
+This citizenship passes by a master's degree of information sources. Each in our borders let us receive echo of a speech with internal vocation. The French media speak to the French people, the Algerian media to the Algerians, the American media to the Americans, the Israeli media to the Israelis etc.... But what says the other one, on the other side of the ocean or of the border ?
+Our site, allows to reach several information sources in the world, from keywords and from theme of research. GK is a site in movement, it is not congealed, his(her) users are possible develop it by proposing other sources.
+The internationalism was one of beautiful utopias of the XIXem century, broken, one century ago, on the massacres of the World War I.
+The globalization is the internationalization of goods and business, GK wants to contribute to develop for the largest number, the internationalization of ideas and consciousnesses.</div>		
+		</div>
+<div class="inter_div_right" > </div>
+		<div class="focus" >
+			<div class="focus_header" >Focus</div>
+			<div class="focus_main" >
+				<div class="focus_slide" >
+
+<div class="focus_content" > 
+
+	<div class="focus_text" > Focus SLIDE Focus SLIDE Focus SLIDE Focus SLIDE  Focus SLIDE  Focus SLIDE   Focus SLIDE  Focus SLIDE   Focus SLIDE   Focus SLIDE  
+	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE  v
+	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE  
+	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE
+	</div>
+
+	<div class="focus_references" >
+		<div class > references :</div>
+		<div class="focus_reference" ><a href="http://perspektives.org">  http://perspektives.org </a></div>
+	</div>
+
+	</div> 
+
+				</div>
+			</div>		
+		</div>
+	</div><div class="collapse" > <img src='/assets/left.png' title="collapse" width="17" /></div>
+	</div>
+	<div class="splitter_right" >
+	<div class="expand" > <img src='/assets/right.png' width="17" title="expand" /></div>
+		<div class="content_search" >
+				<div class="content_search_input" >
+					<input id="searchInput"></input>
+					<select id="langselect">
+						<option value="all" >all languages</div>
+						<option value="fr" >Français</div>
+						<option value="en" >English</div>
+						<option value="de" >Deutsch</div>
+					</select> 	
+					<div class="look" id="startSearch" >Take a look</div>			
+				</div>
+			 	<div class="content_search_result" >
+					<div class="loading_result"  > <img src='/assets/loading.gif' /> </div>
+					<div id="resultsContainer" style="display:none;">	
+					</div>				
+				</div>	
+		</div>
+	</div>
+</div>
+<div class="footer" ><div class='basicfooter' > Contact | powered by Rails </div></div>
+
