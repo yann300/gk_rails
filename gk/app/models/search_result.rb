@@ -11,8 +11,13 @@ class SearchResult
 	@title = item["_source"]["title"]
 	@content = content
 	@highlight = matched_content
+	begin
 	myUri = URI.parse( @url )
-	@host = myUri.host
+	@host = myUri.host	
+	rescue Exception => e
+	@host = @url.split('//').first.split('/').first;
+	end	
+	
 	@post_date = post_date
 	@ID = item["_source"]["id"]
 	@score = item["_score"]

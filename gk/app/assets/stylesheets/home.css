@@ -6,10 +6,12 @@ body{
 
 html, body{
 	height: 100%;
+	overflow : hidden;
 }
 
 
 /*************** CONTENT ************/
+
 
 .content{	
     margin: 0;
@@ -79,8 +81,14 @@ html, body{
 }
 
 .look{
-	cursor :pointer;	
-	display: inline-block;
+	background-image: url("/assets/loupe.png");
+    background-repeat: no-repeat;
+    background-size: auto 33px;
+    cursor: pointer;
+    display: inline-block;
+    height: 42px;
+    vertical-align: middle;
+    width: 40px;
 }
 
 .content_search_result{	
@@ -102,6 +110,13 @@ html, body{
 	top: 36%; 
 	left: 45%;
 display : none;
+}
+
+.expand {
+	cursor: pointer;
+    margin-left: -13px;
+    margin-top: -13px;
+    position: fixed;
 }
 
 

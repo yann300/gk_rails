@@ -89,17 +89,42 @@ $(function (){
 	
 });
 
+var isCollapsed = false;
 function initPage(){
-	$(".content").css('height', $(document).height() - 130 - 55 + 'px');
-	$(".content").jqxSplitter({ width:"99%", height: $(document).height() - 130 - 55, splitBarSize : 15 } );
-	$(".content_left").css('width', '910px');
-	$(".content").on('expanded', function (event){  });
-	$(".content").on('collapsed', function (event){  });
-	
-	/*$('.expand').bind('click', function (e){ 
-		$(".content").jqxSplitter('expand');
+	//$(".content").css('height', $(document).height() - 130 - 100 + 'px');
+	var panelwidthRight = $(document).width() * (75/100);
+	var panelwidthLeft = $(document).width() * (25/100);
+	$(".content").jqxSplitter(
+	{ 
+		width:"99%", 
+		height: $(document).height() - 130 - 35, 
+		splitBarSize : 0.5,
+		resizable : false,
+		panels: [{ size: panelwidthLeft }, { size: panelwidthRight}]	
+	} );
+	//$(".content_left").css('width', '910px');
+	$(".content").on('expanded', function (event){ 
+		$('.expand img').attr('src','/assets/left_grey.png'); 
+		$('.expand').css('margin-left', '-13px');
+		isCollapsed = false; 
 	});
-	$('.collapse').bind('click', function (e){ 
+
+	$(".content").on('collapsed', function (event){ 
+		$('.expand img').attr('src','/assets/right_grey.png');
+		$('.expand').css('margin-left', '-10px');
+		isCollapsed = true; 
+	});
+	
+	$('.expand').bind('click', function (e){ 
+		if (isCollapsed)
+		{				
+			$(".content").jqxSplitter('expand');
+		}
+		else{
+			$(".content").jqxSplitter('collapse');		
+		}
+	});
+	/*$('.collapse').bind('click', function (e){ 
 		$(".content").jqxSplitter('collapse');
 	});*/
 }
@@ -186,17 +211,18 @@ The globalization is the internationalization of goods and business, GK wants to
 	</div>
 	</div>
 	<div class="splitter_right" >
-	
+	<div class="expand" > <img src="/assets/left_grey.png" width="22px" /> </div>
 		<div class="content_search" >
 				<div class="content_search_input" >
 					<input id="searchInput"></input>
+					<div class="look" id="startSearch" ></div>	
 					<select id="langselect">
 						<option value="all" >all languages</div>
 						<option value="fr" >Français</div>
 						<option value="en" >English</div>
 						<option value="de" >Deutsch</div>
 					</select> 	
-					<div class="look" id="startSearch" >Take a look</div>			
+							
 				</div>
 			 	<div class="content_search_result" >
 					<div class="loading_result"  > <img src='/assets/loading.gif' /> </div>

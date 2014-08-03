@@ -9,7 +9,7 @@ require "httpclient"
 		searchString = searchString.gsub("\"", "")
 		enhancedQuery = '"match" : { "' + field + '_' + lang + '"  : { "query" :  "' + searchString + '", "type" : "phrase", "operator" : "and" } }' 
 	else
-		enhancedQuery = '"match" : { "' + field + '_' + lang + '" : { "query" : "' + searchString + '", "operator" : "or" } }'  
+		enhancedQuery = '"match" : { "' + field + '_' + lang + '" : { "query" : "' + searchString + '", "operator" : "and" } }'  
 	end
 	return enhancedQuery
   end
@@ -113,7 +113,7 @@ require "httpclient"
 
 	
 	#res = client.post('http://91.121.25.98:9200/_search', query)
-	res = client.post('http://127.0.0.1:9200/gkindex/doc/_search?explain=false', query)
+	res = client.post('http://127.0.0.1:9200/index/doc/_search?explain=false', query)
 	#logger.debug query
 	parsed = JSON.parse(res.body)
         #logger.debug res.body
