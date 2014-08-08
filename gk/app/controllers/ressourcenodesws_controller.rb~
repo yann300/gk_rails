@@ -4,6 +4,11 @@ class RessourcenodeswsController < ApplicationController
   def getRessourceNodesFrom
 	  ressourceManager = RessourcesnodewsManager.new()
 @getRessourceNodesFromResult = ressourceManager.getRessourceNodesFrom(params[:urls])
+logger = Logger.new(STDOUT)
+logger.debug 'TEST'
+logger.debug @getRessourceNodesFromResult.to_s
+logger.debug 'TESTEND'
+	  
   end
   
   respond_to :json, :xml  
@@ -15,6 +20,6 @@ class RessourcenodeswsController < ApplicationController
   respond_to :json, :xml  
   def getLastCreatedRessourceNode
 	  ressourceManager = RessourcesnodewsManager.new()
-          @getLastCreatedRessourceNodeResult = ressourceManager.getLastCreatedRessourceNode(params[:length])
+          return ressourceManager.getLastCreatedRessourceNode(params[:length])
   end
 end

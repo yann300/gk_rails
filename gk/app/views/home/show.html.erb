@@ -31,10 +31,77 @@
 	<div class="resultcontainerimage" > <img src="{{= result.image }}" width="236" alt="image" ></img> </div>
 	{{ } }}
 	<div class="resultcontainerscore" > <i>{{= result.score }}</i> </div>
-	<div class="resultcontainerinfo"><div class="resultcontainerinfonode resultcontainerinfonode_updatepending" urlref="{{= result.url }}" ></div></div>
 	<div class="resultcontaineraction"><div class="recommend" sourceid="{{= result.ID }}" >recommend</div></div>
+	<div class="resultcontainerinfo"><div class="resultcontainerinfonode resultcontainerinfonode_updatepending" urlref="{{= result.url }}" ></div></div>
+	
         <!--<div class="resultcontainerlink" >{{= result.url }}</div>-->
-	<div class="resultcontainerhightlight" >{{= result.highlight }}</div>	
+	<div class="resultcontainerhightlight" ></div>	
+      </div>
+</script>
+
+<script type="text/template" id="focus-template" >   
+	<div class="focus_content {{= style_class }}" >
+		<div class="focus {{=  style_class=='focus_pair' ? 'focus_left' : 'focus_right' }}">
+		
+		
+		
+		<div class="focus_inner"  >
+		
+			{{ if (style_class=='focus_impair') { }}   
+      	
+      	<div class="subcontent_left" >
+      				<div class="focus_reference"  >      	
+							{{ _.each(focus.sources, function(source) { }}     
+							<div><a href="{{= source.url }}">{{= source.title }}</a></div>	
+							{{ }); }}  
+      				</div>
+      			
+      				{{ if (focus.image_url != null) { }}
+      				<div class="focus_image_left" >
+      					<img src="{{= focus.image_url }}"  />
+      				</div>
+      				{{ } }} 
+      	
+      	
+      			
+      	</div>
+      	
+      	<div class="content_right" >
+      		<div class="focus_title"  >{{= focus.title }}</div>
+      		<div class="focus_text"  >{{= focus.content }}</div>
+      	</div>
+      	
+      	
+      	{{ } }}
+      	{{ if (style_class=='focus_pair') { }}   
+      	<div class="content_left" >
+      		<div class="focus_title"  >{{= focus.title }}</div>
+      		<div class="focus_text"  >{{= focus.content }}</div>
+      	</div>
+      	
+      	<div class="subcontent_right" >
+      			<div class="focus_reference"  >      	
+							{{ _.each(focus.sources, function(source) { }}     
+							<div><a href="{{= source.url }}">{{= source.title }}</a></div>	
+							{{ }); }}  
+      			</div>
+      			
+      				{{ if (focus.image_url != null) { }}
+      				<div class="focus_image_left" >
+      					<img src="{{= focus.image_url }}"  />
+      				</div>
+      				{{ } }} 
+      	
+      	
+      		
+      	</div>      	  	
+      	
+      	{{ } }}
+      	
+      </div>  
+      
+      	
+      </div><div class="clearfix" ></div>
       </div>
 </script>
 
@@ -61,8 +128,13 @@ $(function (){
 	};
 	search_manager = new searchManager('resultsContainer');	
 	ressourcenode_manager = new ressourceNodesManager();
-	//ressourcenode_manager.getCurrentRessourceNode();
-	//search_manager.on(search_manager.UPDATEUI_COMPLETE, ressourcenode_manager.updateRessourceDisplayed, ressourcenode_manager);
+	search_manager.on(search_manager.UPDATEUI_COMPLETE, ressourcenode_manager.updateRessourceDisplayed, ressourcenode_manager);	
+			
+	try{
+        	ressourcenode_manager.getLastCreatedRessourceNode(10);
+	}
+	catch (e){
+	}
 
 	var query = getUrlVars()['q'];
 	if (query != null && query != undefined)
@@ -94,7 +166,7 @@ function initPage(){
 	//$(".content").css('height', $(document).height() - 130 - 100 + 'px');
 	var panelwidthRight = $(document).width() * (75/100);
 	var panelwidthLeft = $(document).width() * (25/100);
-	$(".content").jqxSplitter(
+	/*$(".content").jqxSplitter(
 	{ 
 		width:"99%", 
 		height: $(document).height() - 130 - 35, 
@@ -124,6 +196,7 @@ function initPage(){
 			$(".content").jqxSplitter('collapse');		
 		}
 	});
+	*/
 	/*$('.collapse').bind('click', function (e){ 
 		$(".content").jqxSplitter('collapse');
 	});*/
@@ -171,56 +244,15 @@ function pressed(e)
 	</div>
 </div>
 <div class="content" >
-	<div class="splitter_left" >
-	<div class="content_left" >
-		<div class="edito" >
-			<div class="edito_title">Edito</div>
-			<div class="edito_body">
-In the time of globalization, of revolution of  information and communications tools, the national borders become blurred.
-The history and the new technologies are underway. At the same time, we observe that nationalist, violent pushes, re-appear.
-Against these resurgent nationalisms, a world citizenship has to emerge, an international awareness, to give to the globalization other priorities that circulation of financial fluxs, goods and dumping in employment.
-This citizenship passes by a master's degree of information sources. Each in our borders let us receive echo of a speech with internal vocation. The French media speak to the French people, the Algerian media to the Algerians, the American media to the Americans, the Israeli media to the Israelis etc.... But what says the other one, on the other side of the ocean or of the border ?
-Our site, allows to reach several information sources in the world, from keywords and from theme of research. GK is a site in movement, it is not congealed, his(her) users are possible develop it by proposing other sources.
-The internationalism was one of beautiful utopias of the XIXem century, broken, one century ago, on the massacres of the World War I.
-The globalization is the internationalization of goods and business, GK wants to contribute to develop for the largest number, the internationalization of ideas and consciousnesses.</div>		
-		</div>
-<div class="inter_div_right" > </div>
-		<div class="focus" >
-			<div class="focus_header" >Focus</div>
-			<div class="focus_main" >
-				<div class="focus_slide" >
-
-<div class="focus_content" > 
-
-	<div class="focus_text" > Focus SLIDE Focus SLIDE Focus SLIDE Focus SLIDE  Focus SLIDE  Focus SLIDE   Focus SLIDE  Focus SLIDE   Focus SLIDE   Focus SLIDE  
-	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE  v
-	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE  
-	 Focus SLIDE   Focus SLIDE   Focus SLIDE   Focus SLIDE
-	</div>
-
-	<div class="focus_references" >
-		<div class > references :</div>
-		<div class="focus_reference" ><a href="http://perspektives.org">  http://perspektives.org </a></div>
-	</div>
-
-	</div> 
-
-				</div>
-			</div>		
-		</div>
-	</div>
-	</div>
-	<div class="splitter_right" >
-	<div class="expand" > <img src="/assets/left_grey.png" width="22px" /> </div>
-		<div class="content_search" >
+<div class="content_search" >
 				<div class="content_search_input" >
 					<input id="searchInput"></input>
 					<div class="look" id="startSearch" ></div>	
 					<select id="langselect">
-						<option value="all" >all languages</div>
-						<option value="fr" >Français</div>
-						<option value="en" >English</div>
-						<option value="de" >Deutsch</div>
+						<option value="all" >all languages</option>
+						<option value="fr" >Français</option>
+						<option value="en" >English</option>
+						<option value="de" >Deutsch</option>
 					</select> 	
 							
 				</div>
@@ -230,7 +262,35 @@ The globalization is the internationalization of goods and business, GK wants to
 					</div>				
 				</div>	
 		</div>
+	
+	<div class="content_middle" >
+		<div class="edito" >
+			<span class="edito_title">Citizens of the world</span>
+			<span class="edito_body">
+<span>The globalization is internationalization of goods and business, Wibo wants to contribute to develop internationalization of ideas and informations. It s both a search tool and an idea that consists to make us citizens of the world.  Each in our borders let us receive echo of a speech with internal vocation. The French media speak to the French people, the Algerian media to the Algerians, the American media to the Americans, the Israeli media to the Israelis etc.... </span><br />
+<span>National borders become blurred by revolution of information and communications tools. But, we observe that nationalism, violent pushes, re-appear. Against these resurgent, a world citizenship has to emerge, an international awareness, to give to the globalization other priorities that circulation of financial fluxs, goods and dumping in employment.</span><br />
+<span>This citizenship passes by a master's degree of information sources.  What says the other one, on the other side of the ocean or of the border ? Our site, allows to reach different and sometimes contradictory information sources.</span> </span>		
+		</div>
+<div class="inter_div_right" > </div>
+		
 	</div>
+	
+	<!--<div class="focus_header_title">
+		<div>Focus</div>	
+	</div>-->
+	
+<div class="content_bottom" >
+	
+
+<div class="focuses_content" > 
+
+	
+
+	</div> 
+
+			
+		
+	
 </div>
-<div class="footer" ><div class='basicfooter' > Contact | powered by Rails </div></div>
+<div class="footer" ><div class='basicfooter' >powered by Rails </div></div>
 

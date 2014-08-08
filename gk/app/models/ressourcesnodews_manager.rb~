@@ -47,10 +47,10 @@ class RessourcesnodewsManager
 	results.each do |row|	
 			
 		if hash.has_key?(row[0])			
-			hash[row[0]].addSource(row[4], row[5], row[6])
+			hash[row[0]].addSource(row[3], row[4], row[5])
 		else
-			new_node = Node.new(row[0], row[1], row[2], row[3])
-			new_node.addSource(row[4], row[5], row[6])
+			new_node = Node.new(row[0], row[1], row[2])
+			new_node.addSource(row[3], row[4], row[5])
 			hash[row[0]] = new_node
 		end
   	end

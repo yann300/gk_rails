@@ -2,5 +2,5 @@
 object @getRessourceNodesFromResult
 
 node :result do |getRessourceNodesFromResult|
-  getRessourceNodesFromResult.getValues
+  getRessourceNodesFromResult.to_s
 end

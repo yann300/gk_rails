@@ -48,6 +48,4 @@ gem 'rabl'
 
 gem 'httpclient'
 
-gem 'mysql2'
-
 

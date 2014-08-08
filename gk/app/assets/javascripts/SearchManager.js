@@ -16,14 +16,24 @@ function searchManager(containerId)
 	
 	this.search = function (inputString)
 	{	
-		$('#' + this.containerId).html('');
-		$('#' + this.containerId).hide();
-		$('.loading_result').show();
-		this.currentIndex = 0;
-		$('#loadMore').hide();	
-		var caller = new searchCaller(inputString);
-		caller.on(caller.SEARCH_COMPLETE, this.updateUI, this);
-		caller.search(inputString, 0, this.getLang());	
+		var me = this;
+		$('.content_search_result').addClass('content_search_result_started');
+		$('.content_search_result').animate({
+			height:	'500px'
+		}, function(){
+			$('#' + me.containerId).html('');
+			$('#' + me.containerId).hide();
+			$('.loading_result').show();
+			
+			
+			me.currentIndex = 0;
+			$('#loadMore').hide();	
+			var caller = new searchCaller(inputString);
+			caller.on(caller.SEARCH_COMPLETE, me.updateUI, me);
+			caller.search(inputString, 0, me.getLang());	
+			
+			});
+		
 	}
 
 	this.loadMoreSearch = function (inputString)
@@ -41,8 +51,9 @@ function searchManager(containerId)
 	}
 
 	this.updateUI = function (data){
-		$(".content").jqxSplitter('collapse');	
+		
 		$('.loading_result').hide();
+		$('.content_search_result').css('height','inherit');
 		$('#' + this.containerId).show();
 		var htmlContainer = _.template($('#search-results-container-template').html(), {});
 		$('#' + this.containerId).html(htmlContainer);

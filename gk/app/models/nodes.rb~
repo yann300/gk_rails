@@ -1,0 +1,25 @@
+class Nodes
+
+   def initialize(id, content)
+        @id = id
+	@content = content
+	@sources = Array.new
+   end
+
+   def getId
+        return @id
+   end
+
+   def getContent
+        return @content
+   end
+
+   def getSources
+        return @sources
+   end
+
+   def addSource(source)
+        @sources.push(source)
+   end
+end
+

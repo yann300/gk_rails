@@ -29,6 +29,7 @@
 	font-style: italic;
 	font-size:14px;
 	cursor:pointer;
+	width: 170px;
 }
 
 .hostResultontainer .footer{
@@ -128,3 +129,8 @@
 	background-repeat : no-repeat;
 	background-position: 45px 60px;
 }
+
+.ui-widget-header{
+background: inherit;	
+color : #b7a600;
+	}

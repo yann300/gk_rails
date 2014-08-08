@@ -1,0 +1,21 @@
+class Source 
+
+    def initialize(id, value, title)
+		  @id = id
+        @value = value	
+        @title = title
+    end
+
+    def getvalue
+        return @value
+    end
+
+    def getId
+		return @id
+    end
+    
+    def getTitle
+		return @title
+    end
+end
+

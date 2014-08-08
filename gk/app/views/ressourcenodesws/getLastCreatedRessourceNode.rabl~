@@ -1,0 +1,6 @@
+
+object @getLastCreatedRessourceNodeResult
+
+node :result do |getLastCreatedRessourceNodeResult|
+  getLastCreatedRessourceNodeResult.to_s
+end
