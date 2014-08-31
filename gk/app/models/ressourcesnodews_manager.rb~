@@ -15,7 +15,7 @@ class RessourcesnodewsManager
 			logger.info 'test'
 		logger.info sources	
 	sources.each do |source|
-		results = connection.connection.execute("select T2.id, T2.title, T2.content, T2.image_url, T1.id, T1.source, T1.title from (select * FROM focus_has_sources WHERE source='" + source + "') T1 JOIN Focus T2 ON T2.id=T1.id_focus ")
+		results = connection.connection.execute("select T2.id, T2.title, T2.content, T2.image_url, T1.id, T1.source, T1.title, T1.post_date from (select * FROM focus_has_sources WHERE source='" + source + "') T1 JOIN Focus T2 ON T2.id=T1.id_focus ")
 				
 		hash = self.computeResults(results, hash)
 	end	
@@ -36,7 +36,7 @@ class RessourcesnodewsManager
 	logger = Logger.new(STDOUT)
 	
 	#results = connection.connection.execute("select * from focus_has_sources WHERE id_focus=(select id, content FROM Focus LIMIT " + length.to_s + ")")
-	results = connection.connection.execute("select T1.id, T1.title, T1.content,T1.image_url, T2.id, T2.source, T2.title from (select * FROM Focus LIMIT " + length.to_s + ") T1 JOIN focus_has_sources T2 ON T1.id=T2.id_focus ")
+	results = connection.connection.execute("select T1.id, T1.title, T1.content,T1.image_url, T2.id, T2.source, T2.title, DATE(T1.post_date) from (select * FROM Focus ORDER BY post_date DESC LIMIT " + length.to_s + ") T1 JOIN focus_has_sources T2 ON T1.id=T2.id_focus ")
 	hash = Hash.new
 	hash = self.computeResults(results, hash)
 	return Nodes.new(hash.values)
@@ -47,10 +47,10 @@ class RessourcesnodewsManager
 	results.each do |row|	
 			
 		if hash.has_key?(row[0])			
-			hash[row[0]].addSource(row[3], row[4], row[5])
+			hash[row[0]].addSource(row[4], row[5], row[6])
 		else
-			new_node = Node.new(row[0], row[1], row[2])
-			new_node.addSource(row[3], row[4], row[5])
+			new_node = Node.new(row[0], row[1], row[2], row[3], row[7])
+			new_node.addSource(row[4], row[5], row[6])
 			hash[row[0]] = new_node
 		end
   	end

@@ -101,7 +101,7 @@ require "httpclient"
                 }
             },
 	    {
-		"script_score": { "script": "_score * doc[\"customRelevance\"].value" } 
+		"script_score": { "script": "_score * doc[\"customRelevance\"].value + doc[\"customRelevance_focus\"].value" } 
 		}		
         ],'
 	
@@ -116,7 +116,7 @@ require "httpclient"
 	res = client.post('http://127.0.0.1:9200/gkindex/doc/_search?explain=false', query)
 	#logger.debug query
 	parsed = JSON.parse(res.body)
-        logger.debug res.body
+        #logger.debug res.body
 	resultsA = []
 	#logger.info parsed["hits"]["hits"].length
 	parsed["hits"]["hits"].each do|item|

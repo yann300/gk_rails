@@ -101,7 +101,7 @@ require "httpclient"
                 }
             },
 	    {
-		"script_score": { "script": "_score * doc[\"customRelevance\"].value" } 
+		"script_score": { "script": "_score * ((doc[\"customRelevance\"].value + doc[\"customRelevance_focus\"].value) / 2)" } 
 		}		
         ],'
 	

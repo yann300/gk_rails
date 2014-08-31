@@ -1,10 +1,11 @@
 class Node 
 
-   def initialize(id, title, content, image_url)
+   def initialize(id, title, content, image_url, post_date)
         @id = id
         @title = title
 	@content = content
 	@image_url = image_url
+	@post_date = post_date
 	@sources = Array.new
    end
    
@@ -26,6 +27,10 @@ class Node
 
    def getSources
         return @sources
+   end
+
+   def getPostDate
+        return @post_date
    end
 
    def addSource(id, source, title)
